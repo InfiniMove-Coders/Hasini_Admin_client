@@ -1,12 +1,11 @@
-# Hasini_Admin_client
-This is the frontend of the hasini enterprices admin.
+# Hasini Admin client
+This is the frontend of the Hasini Enterprises Admin.
 
 ## Table of Contents
 - [Installation](#installation)
 - [Scripts](#Scripts)
 - [Features](#Features)
 - [Technologies used](#Technologies_Used)
-- [Folder Structure](#FolderStructure)
 
 ## Installation
 
