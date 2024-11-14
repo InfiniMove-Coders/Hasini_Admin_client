@@ -19,20 +19,16 @@ const AddProduct = () => {
 
 	const handleProductAdd = (data) => {
 		data["Product_Image"] = imageobj;
-		if (document.getElementById("category_chocolate").checked) {
-			data["category_chocolate"] = "chocolate";
-		}
-		if (document.getElementById("category_biscuit").checked) {
-			data["category_biscuit"] = "biscuit";
-		}
-		if (document.getElementById("category_other").checked) {
-			data["category_other"] = "other";
-		}
+		let formdata = new FormData(document.getElementById("productAddForm"));
+		let res = {}
+		formdata.forEach((val, key) => {
+			res[key] = val;
+		})
+		data["category"] = res["category"];
 
 		// code to send data to backend....
 
 		console.log(data);
-		alert(data);
 		//After adding the product
 		toast.success("Product added successfully", { theme: "dark" })
 		setImagename("");
@@ -54,6 +50,7 @@ const AddProduct = () => {
 		Description: Yup.string().required("*required"),
 		Weight: Yup.number().required("required"),
 		Manufacture: Yup.string().required("*required"),
+		category: Yup.string().required("*select one category"),
 	})
 
 	const formik = useFormik({
@@ -67,6 +64,7 @@ const AddProduct = () => {
 			Description: "",
 			Weight: "",
 			Manufacture: "",
+			category: "",
 		},
 		validationSchema,
 		onSubmit: (values) => {
@@ -98,7 +96,7 @@ const AddProduct = () => {
 						<p className="text-[170%] font-bold text-[#38023B]">Add Product</p>
 					</div>
 
-					<div className="w-full h-auto border-[black] border-[0px] flex flex-row items-center justify-around">
+					<div className="w-full h-auto border-[black] border-[0px] flex flex-row items-start justify-around">
 						<AddPreviewCard formik={formik} imageobj={imageobj} />
 						<div className="w-[2px] border-[#D9D9D9] border-[1px] h-[40dvw]"></div>
 						<AddProductForm formik={formik} imagename={imagename} setImagename={setImagename} imageobj={imageobj} setImageobj={setImageobj} imageref={imageref} imageerror={imageerror} setImageerror={setImageerror} />

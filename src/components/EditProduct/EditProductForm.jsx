@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorAlert from "../Others/ErrorAlert";
 
-const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj, imageref, imageerror, setImageerror }) => {
+const EditProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj, imageref, imageerror, setImageerror, imageurl, setImageurl, FetchProductData }) => {
 
 	const handleImage = (event) => {
 		let size = 5 * 1024 * 1024;
@@ -24,6 +24,8 @@ const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj
 			setImageobj(file);
 			setImagename(file.name);
 			setImageerror(null);
+
+
 		}
 
 	}
@@ -31,9 +33,9 @@ const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj
 	return (
 		<div className="w-[40%] h-auto border-[black] border-[0px]">
 
-			<p className="text-[150%] font-bold underline text-center">Add Product</p>
+			<p className="text-[150%] font-bold underline text-center">Edit Product</p>
 
-			<form onSubmit={formik.handleSubmit} id="productAddForm">
+			<form onSubmit={formik.handleSubmit} id="productEditForm">
 				<div className="w-full h-auto mt-[10px] border-[black] border-[0px] p-[10px]">
 
 					<input
@@ -49,13 +51,17 @@ const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj
 							?
 							<img src={URL.createObjectURL(imageobj)} className="h-[100%]" />
 							:
-							<div className="w-auto h-auto flex flex-col items-center justify-between gap-[5px]">
-								<div className="bg-white p-[2px] flex flex-row items-center justify-between gap-[2px] px-[10px] rounded-lg text-[#133DF6] font-[500]">
-									<Upload />
-									<p>Upload Photo or Drag the File</p>
-								</div>
-								<p className="text-[#676565]">(Max 5Mb)</p>
-							</div>}
+							imageurl
+								?
+								<img src={imageurl} className="h-[100%]" />
+								:
+								<div className="w-auto h-auto flex flex-col items-center justify-between gap-[5px]">
+									<div className="bg-white p-[2px] flex flex-row items-center justify-between gap-[2px] px-[10px] rounded-lg text-[#133DF6] font-[500]">
+										<Upload />
+										<p>Upload Photo or Drag the File</p>
+									</div>
+									<p className="text-[#676565]">(Max 5Mb)</p>
+								</div>}
 					</div>
 					{imageerror && !imageobj ? <ErrorAlert>{imageerror}</ErrorAlert> : null}
 
@@ -84,6 +90,7 @@ const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									checked={formik.values.category == "Biscuit"}
+
 								/>
 								<label htmlFor="category_biscuit" className="font-[300] cursor-pointer selection:bg-none">Biscuit</label>
 							</div>
@@ -230,21 +237,20 @@ const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj
 					</div>
 
 					<div className="w-full h-auto flex flex-row items-center justify-center gap-[20px] mt-[10px]">
-						<button
-							type="reset"
-							className="font-bold px-[10px] py-[1px] rounded-lg border-[rgba(0,0,0,0.5)] border-[1px] bg-[#D9DD9D9]"
+						<div
+							className="font-bold px-[10px] py-[1px] rounded-lg border-[rgba(0,0,0,0.5)] border-[1px] bg-[#D9DD9D9] cursor-pointer"
 							onClick={() => {
-								formik.resetForm();
+								FetchProductData();
 								setImagename("");
 								setImageobj(false);
 								imageref.current.value = "";
 
 							}}
-							id="resetAddForm"
+							id="resetEditForm"
 
 						>
 							Reset
-						</button>
+						</div>
 						<button
 							className="font-bold px-[10px] py-[1px] rounded-lg border-[rgba(0,0,0,0.5)] border-[1px] bg-[#D9DD9D9]"
 							type="submit"
@@ -260,4 +266,4 @@ const AddProductForm = ({ formik, imagename, setImagename, imageobj, setImageobj
 	)
 }
 
-export default AddProductForm
+export default EditProductForm
