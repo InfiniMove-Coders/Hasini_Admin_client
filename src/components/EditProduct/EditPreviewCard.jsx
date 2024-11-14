@@ -1,17 +1,21 @@
 import { Image, ShoppingCart, Star } from "@mui/icons-material"
 
-
-const AddPreviewCard = ({ formik, imageobj }) => {
+const EditPreviewCard = ({ imageobj, formik, imageurl }) => {
 	return (
 		<div className="w-[25%] border-[black] border-[0px] flex flex-col items-center justify-start gap-[15px] sticky top-[50px]">
-			<p className="text-[150%] font-bold underline">AddPreviewCard</p>
+			<p className="text-[150%] font-bold underline">EditPreviewCard</p>
 			<div className="w-full h-auto bg-white rounded-[6px] p-[10px] flex flex-col items-start justify-start border-[#D9D9D9] border-[2px] gap-[5px]">
 				<div className="w-[100%] h-[15dvw] border-[#D9D9D9] border-[1px] flex items-center justify-center rounded-[8px] overflow-hidden">
 					{imageobj
 						?
 						<img src={URL.createObjectURL(imageobj)} className="max-h-[100%]" />
 						:
-						<Image />
+						imageurl
+							?
+							<img src={imageurl} className="max-h-[100%]" />
+							:
+							<Image />
+
 					}
 
 				</div>
@@ -49,4 +53,4 @@ const AddPreviewCard = ({ formik, imageobj }) => {
 	)
 }
 
-export default AddPreviewCard
+export default EditPreviewCard
