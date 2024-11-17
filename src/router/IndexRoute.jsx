@@ -3,6 +3,7 @@ import Home from "../pages/Home"
 import Dashboard from "../pages/Dashboard"
 import EditProduct from "../pages/EditProduct"
 import AddProduct from "../pages/AddProduct"
+import Orders from "../components/Orders/Orders"
 
 
 const IndexRoute = () => {
@@ -12,6 +13,8 @@ const IndexRoute = () => {
 			<Route path="/dashboard" element={<Dashboard />} >
 				<Route path="edit" element={<EditProduct />} />
 				<Route path="add" element={<AddProduct />} />
+				<Route path="orders" element={<Orders />} />
+				
 			</Route>
 		</Routes>
 	)
